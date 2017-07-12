@@ -78,6 +78,7 @@
                                 </div>
                             </div>
 
+                        @if( isset($emprestimo[0]) )
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="status">status:</label>
                                 <div class="col-sm-5">
@@ -95,6 +96,9 @@
                                     </select>
                                 </div>
                             </div>
+                        @else
+                            <input type="hidden" name="status" value="Emprestado">
+                        @endif
 
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">

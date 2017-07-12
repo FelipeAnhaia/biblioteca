@@ -11,8 +11,13 @@
 |
 */
 
+Route::get('login/google', 'Auth\LoginController@redirectToProvider')->name('google.login');
+Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');
+
 // alterar para quando estiver logado ele caia na view de listas já, ou ter uma tela inicia lde boa vindas no ssitema...
 Route::get('/', 'HomeController@index')->middleware('auth');
+
+//Route::get('/home', ['as' => 'home', 'uses' => 'HomeController@index']);
 
 Route::group(['namespace' => 'Sistema', 'middleware' => 'auth'], function (){
 	// A primeira parte é a chamda da URL, a segunda é o metodo que vai ser chamado no meu controller
@@ -44,7 +49,7 @@ Route::group(['namespace' => 'Sistema', 'middleware' => 'auth'], function (){
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 /*
 Abaixo as diferentes formas de fazer com que sempre chame uma página de autenticação, antes do sistema

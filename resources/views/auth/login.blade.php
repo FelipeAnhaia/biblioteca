@@ -11,7 +11,7 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail</label>
+                            <label for="email" class="col-md-4 control-label">E-mail</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
@@ -49,16 +49,29 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary btn-block">
                                     Logar
                                 </button>
+                            </div>
+                        </div>
 
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <a class="btn btn-block btn-social btn-google" href="{{ route('google.login') }}">
+                                    Logar com Google
+                                </a>
+                            </div>
+                        </div>
+
+                         <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Esqueceu a senha?
                                 </a>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>

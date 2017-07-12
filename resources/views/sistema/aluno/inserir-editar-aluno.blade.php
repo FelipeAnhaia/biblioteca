@@ -1,5 +1,33 @@
 @extends('layouts.app')
 
+     <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+       integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+     crossorigin="anonymous"></script>
+
+     <!--
+            API CEP: http://apps.widenet.com.br/busca-cep/api-de-consulta
+     -->
+     <script type="text/javascript">
+        jQuery(function($){
+           $("input[name='cep']").change(function(){
+              var cep_code = $(this).val();
+              if( cep_code.length <= 0 ) return;
+              $.get("http://apps.widenet.com.br/busca-cep/api/cep.json", { code: cep_code },
+                 function(result){
+                    if( result.status!=1 ){
+                       alert(result.message || "Houve um erro desconhecido");
+                       return;
+                    }
+                    $("input[name='cep']").val( result.code );
+                    $("input[name='cidade']").val( result.city );
+                    $("input[name='bairro']").val( result.district );
+                    $("input[name='rua']").val( result.address );
+                    $("select[name='estado']").val( result.state );
+                 });
+           });
+        });
+    </script>
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -73,6 +101,13 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="control-label col-sm-2" for="cep">CEP:</label>
+                                    <div class="col-sm-3">
+                                        <input type="text" name="cep" placeholder="CEP" class="form-control" value="{{$aluno->cep or old('cep')}}" maxlength="10">
+                                    </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="control-label col-sm-2" for="rua">Rua:</label>
                                 <div class="col-sm-5">
                                     <input type="text" name="rua" placeholder="Rua" class="form-control" value="{{$aluno->rua or old('rua')}}">
@@ -88,11 +123,6 @@
                                 <label class="control-label col-sm-2" for="bairro">Bairro:</label>
                                 <div class="col-sm-5">
                                     <input type="text" name="bairro" placeholder="Bairro" class="form-control" value="{{$aluno->bairro or old('bairro')}}">
-                                </div>
-
-                                <label class="control-label col-sm-1" for="cep">CEP:</label>
-                                <div class="col-sm-3">
-                                    <input type="text" name="cep" placeholder="CEP" class="form-control" value="{{$aluno->cep or old('cep')}}" maxlength="10">
                                 </div>
                             </div>
 
